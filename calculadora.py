@@ -103,3 +103,19 @@ def testeDivisao():
     print("Usando os valores 10 e 0.")
     resultado = divisao(10, 0)
     print(resultado)
+
+
+# Controle
+def continuar():
+    while True:
+        resposta = input("Deseja continuar os cálculos? (s/n): ").strip().lower()
+        if resposta == "s":
+            return 1
+        elif resposta == "n":
+            saindo()
+        else:
+            mensagem_erro("Opção inválida! Digite 's' para sim ou 'n' para não.")
+
+# Main
+while continuar() == 1:
+    menu()
