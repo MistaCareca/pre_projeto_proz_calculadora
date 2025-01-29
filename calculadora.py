@@ -1,3 +1,12 @@
+# lembrei do primeiro perido
+import time
+
+
+# Função para exibir mensagens de erro
+def err(mensagem):
+    print("\n ERRO: " + mensagem)
+    print("Tente novamente.\n")
+
 # Menu de operações
 def menu():
     print("Escolha uma operação:  ")
@@ -9,7 +18,11 @@ def menu():
     print("|| 5 - Testes        ||")
     print("|| 6 - Sair          ||")
     print("=======================")
-    opcao = int(input("Opção: "))
+    try:
+        opcao = int(input("Opção: "))
+    except ValueError:
+        err("Digite apenas números inteiros!")
+        return menu()
 
     if opcao in [1, 2, 3, 4, 5]:
         if opcao == 5:
@@ -37,7 +50,7 @@ def menu():
         saindo()
 
     else:
-        mensagem_erro("Opção inválida! Escolha um número entre 1 e 6.")
+        err("Opção inválida! Escolha um número entre 1 e 6.")
         return menu()
 
 # Testes
@@ -48,7 +61,11 @@ def exibirTestes():
     print("|| 2 - Testando a divisão  ||")
     print("|| 3 - Sair                ||")
     print("=============================")
-    op = int(input("Opção: "))
+    try:
+        op = int(input("Opção: "))
+    except ValueError:
+        err("Digite apenas números inteiros!")
+        return exibirTestes()
 
     if op == 1:
         testeSoma()
@@ -57,23 +74,34 @@ def exibirTestes():
     elif op == 3:
         saindo()
     else:
-        print("Opção inválida! Escolha um número entre 1 e 3.")
+        err("Opção inválida! Escolha um número entre 1 e 3.")
         return exibirTestes()
 
 # Entrada
 def entrada():
-    a = float(input("Digite o primeiro valor: "))
-    b = float(input("Digite o segundo valor: "))
-    return a, b
+    try:
+        a = float(input("Digite o primeiro valor: "))
+        b = float(input("Digite o segundo valor: "))
+        return a, b
+    except ValueError:
+        err("Digite apenas números válidos!")
+        return entrada()
 
-# Saídas
-def saida(operacao, a, b, resultado):
-    print(f"\n O resultado da {operacao} entre {a} e {b} é {resultado}\n")
+# Testes rápidos
+def testeSoma():
+    print("\nTeste de soma sendo executado!")
+    time.sleep(3)
+    print("Usando os valores 5 e 10.")
+    resultado = soma(5, 10)
+    operacao = "Soma"
+    saida(operacao, 5, 10, resultado)
 
-def saindo():
-    print("\nSaindo... Obrigado por usar a calculadora!\n")
-    exit()
-
+def testeDivisao():
+    print("\nTeste de divisão sendo executado!")
+    time.sleep(3)
+    print("Usando os valores 10 e 0.")
+    resultado = divisao(10, 0)
+    print(resultado)
 
 # Cálculos
 def soma(a, b):
@@ -90,20 +118,14 @@ def divisao(a, b):
         return "Erro: divisão por zero"
     return a / b
 
-# Testes rápidos
-def testeSoma():
-    print("\nTeste de soma sendo executado!")
-    print("Usando os valores 5 e 10.")
-    resultado = soma(5, 10)
-    operacao = "Soma"
-    saida(operacao, 5, 10, resultado)
+# Saídas
+def saida(operacao, a, b, resultado):
+    print(f"\n O resultado da {operacao} entre {a} e {b} é {resultado}\n")
 
-def testeDivisao():
-    print("\nTeste de divisão sendo executado!")
-    print("Usando os valores 10 e 0.")
-    resultado = divisao(10, 0)
-    print(resultado)
-
+def saindo():
+    print("\nSaindo...\n")
+    time.sleep(3)
+    exit()
 
 # Controle
 def continuar():
@@ -114,7 +136,7 @@ def continuar():
         elif resposta == "n":
             saindo()
         else:
-            mensagem_erro("Opção inválida! Digite 's' para sim ou 'n' para não.")
+            err("Opção inválida! Digite 's' para sim ou 'n' para não.")
 
 # Main
 while continuar() == 1:
