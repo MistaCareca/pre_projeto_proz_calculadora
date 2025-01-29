@@ -60,6 +60,21 @@ def exibirTestes():
         print("Opção inválida! Escolha um número entre 1 e 3.")
         return exibirTestes()
 
+# Entrada
+def entrada():
+    a = float(input("Digite o primeiro valor: "))
+    b = float(input("Digite o segundo valor: "))
+    return a, b
+
+# Saídas
+def saida(operacao, a, b, resultado):
+    print(f"\n O resultado da {operacao} entre {a} e {b} é {resultado}\n")
+
+def saindo():
+    print("\nSaindo... Obrigado por usar a calculadora!\n")
+    exit()
+
+
 # Cálculos
 def soma(a, b):
     return a + b
@@ -77,7 +92,14 @@ def divisao(a, b):
 
 # Testes rápidos
 def testeSoma():
-    pass
+    print("\nTeste de soma sendo executado!")
+    print("Usando os valores 5 e 10.")
+    resultado = soma(5, 10)
+    operacao = "Soma"
+    saida(operacao, 5, 10, resultado)
 
 def testeDivisao():
-    pass
+    print("\nTeste de divisão sendo executado!")
+    print("Usando os valores 10 e 0.")
+    resultado = divisao(10, 0)
+    print(resultado)
